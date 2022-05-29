@@ -1,5 +1,5 @@
 #include "info.h"
-//hello
+
 void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmif, char* file_out){
 	
 	FILE* f_out = fopen(file_out, "wb");
