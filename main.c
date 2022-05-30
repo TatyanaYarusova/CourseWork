@@ -41,6 +41,10 @@ int main(int argc, char **argv){
 	strcpy(file,argv[1]);
 
 	FILE* image = fopen(file, "rb");
+	if(!image){
+		puts("К сожалению, не удается открыть файл.");
+		return 0;
+	}
 
 	BitmapFileHeader bmfh;
 	BitmapInfoHeader bmif;
