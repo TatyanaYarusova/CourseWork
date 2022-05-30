@@ -1,5 +1,5 @@
-all: main.o demon.o rectangle.o reflection.o help.o collage.o
-	gcc main.o demon.o rectangle.o reflection.o help.o collage.o -o cw -lm
+all: main.o demon.o rectangle.o reflection.o help.o info.o collage.o
+	gcc main.o demon.o rectangle.o reflection.o help.o info.o collage.o -o cw -lm
 
 main.o: main.c
 	gcc -c main.c
@@ -18,6 +18,9 @@ help.o: help.c
 
 collage.o: collage.c
 	gcc -c collage.c
+
+info.o: info.c
+	gcc -c info.c
 
 clean:
 	rm *.o

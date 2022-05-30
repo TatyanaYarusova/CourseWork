@@ -1,6 +1,6 @@
 #include "info.h"
 
-void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmif, char* file_out){
+void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmif, int flag, char* file_out){
 	
 	FILE* f_out = fopen(file_out, "wb");
 	if(!f_out){
@@ -32,6 +32,10 @@ void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmi
         for(int k=0; k < height*N; k++){
             fwrite(out[k], 1 , w, f_out);
         }
+	if(flag){
+		printFileHeader(bmfh);
+		printInfoHeader(bmif);
+	}
     
 	free_memory(out, height*N);	
 	fclose(f_out);
@@ -40,14 +44,16 @@ void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmi
 int collage(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, char **argv,int opt, int longIndex){
 	char filename[50];
 	strcpy(filename, argv[--argc]);
-	char *optsC= "x:y:?";
+	char *optsC= "x:y:i?";
 	struct option longC[] = {
 	{"count_x", required_argument, 0, 'x'},
 	{"count_y", required_argument, 0, 'y'},
+	{"info", no_argument, 0, 'i'},
 	{ NULL, 0, NULL, 0}
 	};
 	int N = 1;
 	int M = 1;
+	int flag = 0;
 	opt = getopt_long(argc, argv, optsC, longC, &longIndex);
 	while(opt!=-1){
 		switch (opt)
@@ -59,6 +65,10 @@ int collage(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, c
 		case 'y':
 			N = atoi(optarg);
 			break;
+		
+		case 'i':
+			flag++;
+			break;
 
 		case '?':
 			printHelp();
@@ -67,7 +77,7 @@ int collage(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, c
 		}
 		opt = getopt_long(argc, argv, optsC, longC, &longIndex);
 	}
-	colBmp(arr, M, N, bmfh, bmif, filename);
+	colBmp(arr, M, N, bmfh, bmif, flag, filename);
 	return opt;
 
 }

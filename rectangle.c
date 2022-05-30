@@ -179,7 +179,7 @@ void recBmp(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, Point left_
 int rectangle(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, char **argv,int opt, int longIndex){
 	char file_out[50];
 	strcpy(file_out, argv[--argc]);
-	char *optsRec = "l::r::t:c:f:C:?";
+	char *optsRec = "l::r::t:c:f:C:i?";
 	struct option longRec[] = {
 	{"left_up_corner", optional_argument, 0 , 'l' },
 	{"right_down_corner", optional_argument, 0, 'r'},
@@ -187,6 +187,7 @@ int rectangle(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc,
 	{"line_color", required_argument, 0, 'c'},
 	{"fill", required_argument, 0, 'f'},
 	{"color", required_argument, 0, 'C'},
+	{"info", no_argument, 0 , 'i'},
 	{ NULL, 0, NULL, 0}
 	};
 	opt = getopt_long(argc, argv, optsRec, longRec, &longIndex);
@@ -234,6 +235,11 @@ int rectangle(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc,
 
 		case 'C':
 			strcpy(color_fill, optarg);
+			break;
+		
+		case 'i':
+			printFileHeader(bmfh);
+			printInfoHeader(bmif);
 			break;
 
 		case '?':

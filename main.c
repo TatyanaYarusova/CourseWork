@@ -103,7 +103,7 @@ int main(int argc, char **argv){
 		}
 		opt = getopt_long(argc, argv, opts, longOpts, &longIndex);
 	}
-
+	
 	free_memory(arr, height);
 	fclose(image);
 	return 0;

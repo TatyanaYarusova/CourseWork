@@ -46,7 +46,7 @@ typedef struct Point{
 
 
 //Collage
-void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmif, char* file_out);
+void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmif, int flag, char* file_out);
 int collage(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, char **argv,int opt, int longIndex);
 //Collage
 
@@ -76,4 +76,9 @@ int demon(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, cha
 void printHelp();
 void free_memory(Rgb** arr, int height);
 //Help
+
+//info
+void printFileHeader(BitmapFileHeader header);
+void printInfoHeader(BitmapInfoHeader header);
+//info
 

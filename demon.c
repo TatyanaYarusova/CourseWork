@@ -130,7 +130,7 @@ void starBmp(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, Point cent
 int demon(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, char **argv,int opt, int longIndex){
 	char filename[50];
 	strcpy(filename, argv[--argc]);
-	char *optsDem = "c::r:l:u::d::C:?";
+	char *optsDem = "c::r:l:u::d::C:i?";
 	struct option longDem[] = {
 	{"center", optional_argument, 0 , 'c' },
 	{"radius", required_argument, 0, 'r'},
@@ -138,6 +138,7 @@ int demon(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, cha
 	{"right_down_corner", optional_argument, 0, 'd'},
 	{"line", required_argument, 0, 'l'},
 	{"color", required_argument, 0, 'C'},
+	{"info", no_argument, 0, 'i'},
 	{ NULL, 0, NULL, 0}
 	};
 	opt = getopt_long(argc, argv, optsDem, longDem, &longIndex);
@@ -201,6 +202,11 @@ int demon(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, cha
 
 		case 'C':
 			strcpy(color, optarg);
+			break;
+
+		case 'i':
+			printFileHeader(bmfh);
+			printInfoHeader(bmif);
 			break;
 
 		case '?':

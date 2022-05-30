@@ -76,11 +76,12 @@ void refBmp(Rgb** arr, Point left_corner, Point right_corner, BitmapFileHeader b
 int reflection(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, char **argv,int opt, int longIndex){
 	char file_out[50];
 	strcpy(file_out, argv[--argc]);
-	char *optsRef = "a:l::r::?";
+	char *optsRef = "a:l::r::i?";
 	struct option longRef[] = {
 	{"axis", required_argument, 0, 'a'},
 	{"left_up_corner", optional_argument, 0 , 'l' },
 	{"right_down_corner", optional_argument, 0, 'r'},
+	{"info", no_argument, 0, 'i'},
 	{ NULL, 0, NULL, 0}
 	};
 	opt = getopt_long(argc, argv, optsRef, longRef, &longIndex);
@@ -108,6 +109,11 @@ int reflection(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc
 			right_down_corner.n = atoi(argv[optind]);
 			right_down_corner.m = atoi(argv[optind + 1]);
 			flag++;
+			break;
+		
+		case 'i':
+			printFileHeader(bmfh);
+			printInfoHeader(bmif);
 			break;
 		
 		case '?':
