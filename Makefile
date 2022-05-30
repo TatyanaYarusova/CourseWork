@@ -23,4 +23,4 @@ info.o: info.c
 	gcc -c info.c
 
 clean:
-	rm *.o
+	rm -r *.o
