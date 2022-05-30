@@ -52,19 +52,23 @@ int main(int argc, char **argv){
 	fread(&bmfh,1,sizeof(BitmapFileHeader),image);
 	fread(&bmif, 1, sizeof(BitmapInfoHeader), image);
 
-	if (bmfh.signature != 0x4d42){
+	if(bmfh.signature != 0x4d42){
         printf("Файл не соотвествует формату bmp. Пожалуйста, выберите другой файл.\n");
         return 0;
     }
-    if (bmif.bitsPerPixel != 24){
+	if(bmif.headerSize != 40){
+		puts("К сожалению, программа поддерживает только 3 формат BMP файла");
+		return 0;
+	}
+    if(bmif.bitsPerPixel != 24){
         printf("Глубина цвета данного файла не 24 пикселя на бит. Пожалуйста, выберите другой файл.\n");
         return 0;
     }
-    if (bmif.colorsInColorTable != 0){
+    if(bmif.colorsInColorTable != 0){
         printf("Для данного файла используется таблица цветов. Пожалуйста,выберите другой файл.\n");
         return 0;
     }
-    if (bmif.compression != 0){
+    if(bmif.compression != 0){
         printf("Изображение сжатое. Пожалуйста, выберите другой файл.\n");
         return 0;
     }
@@ -103,7 +107,7 @@ int main(int argc, char **argv){
 		}
 		opt = getopt_long(argc, argv, opts, longOpts, &longIndex);
 	}
-	
+
 	free_memory(arr, height);
 	fclose(image);
 	return 0;
