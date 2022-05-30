@@ -88,22 +88,26 @@ int reflection(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc
 	char* axis;
 	Point left_up_corner;
 	Point right_down_corner;
+	int flag = 0;
 
 	while(opt!=-1){
 		switch (opt)
 		{
 		case 'a':
 			axis = optarg;
+			flag++;
 			break;
 		
 		case 'l':
 			left_up_corner.n = atoi(argv[optind]);
 			left_up_corner.m = atoi(argv[optind + 1]);
+			flag++;
 			break;
 
 		case 'r':
 			right_down_corner.n = atoi(argv[optind]);
 			right_down_corner.m = atoi(argv[optind + 1]);
+			flag++;
 			break;
 		
 		case '?':
@@ -111,6 +115,10 @@ int reflection(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc
 			exit(0);
 		}
 		opt = getopt_long(argc, argv, optsRef, longRef, &longIndex);
+	}
+	if(flag!=3){
+		puts("Недостаточно аргументов.");
+		exit(0);
 	}
 	refBmp(arr,left_up_corner, right_down_corner, bmfh, bmif, axis, file_out);
 	return opt;
