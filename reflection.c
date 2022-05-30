@@ -8,6 +8,10 @@ void swap(Rgb *a, Rgb *b){
 
 void refBmp(Rgb** arr, Point left_corner, Point right_corner, BitmapFileHeader bmfh, BitmapInfoHeader bmif, char* axis, char* file_out){
 	FILE* f_out = fopen(file_out, "wb");
+	if(!f_out){
+		puts("К сожалению, не удалось открыть файл.");
+		return;
+	}
 
 	unsigned int height = bmif.height;
 	unsigned int width = bmif.width ;

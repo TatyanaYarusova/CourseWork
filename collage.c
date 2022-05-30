@@ -3,6 +3,10 @@
 void colBmp(Rgb** arr, int M, int N, BitmapFileHeader bmfh, BitmapInfoHeader bmif, char* file_out){
 	
 	FILE* f_out = fopen(file_out, "wb");
+	if(!f_out){
+		puts("К сожалению, не удалось открыть файл.");
+		return;
+	}
 
 	unsigned int height = bmif.height;
 	unsigned int width = bmif.width;

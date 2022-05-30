@@ -42,7 +42,7 @@ int main(int argc, char **argv){
 
 	FILE* image = fopen(file, "rb");
 	if(!image){
-		puts("К сожалению, не удается открыть файл.");
+		puts("К сожалению, не удалось открыть файл.");
 		return 0;
 	}
 

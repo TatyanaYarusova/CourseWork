@@ -84,6 +84,10 @@ void color(Rgb* elem, char* c){
 
 void recBmp(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, Point left_corner, Point right_corner, int line, char* color_line, char* fill, char* color_rec, char* file_out){
 	FILE* f_out = fopen(file_out, "wb");
+	if(!f_out){
+		puts("К сожалению, не удалось открыть файл.");
+		return;
+	}
 	
 	fwrite(&bmfh, 1, sizeof(BitmapFileHeader),f_out);
 	fwrite(&bmif, 1, sizeof(BitmapInfoHeader),f_out);
