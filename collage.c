@@ -77,6 +77,10 @@ int collage(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, c
 		}
 		opt = getopt_long(argc, argv, optsC, longC, &longIndex);
 	}
+	if((N > 10)||(M > 10)){
+		puts("Вы превысили максимальные параметры коллажа.");
+		esit(0);
+	}
 	colBmp(arr, M, N, bmfh, bmif, flag, filename);
 	return opt;
 
