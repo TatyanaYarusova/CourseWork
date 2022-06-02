@@ -141,7 +141,8 @@ void recBmp(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, Point left_
 		strcpy(color_rec, "black");
 	}
 	check_color(color_line);
-	check_color(color_rec);
+	if(strcmp(fill,"y") == 0)
+		check_color(color_rec);
 
 	if(strcmp(fill,"y") == 0){
 		for(int n = start_n; n < end_n; n++){
