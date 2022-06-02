@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
-//just smothing new
+
 #pragma pack (push, 1)
 typedef struct
 {
