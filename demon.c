@@ -254,7 +254,7 @@ int demon(BitmapFileHeader bmfh, BitmapInfoHeader bmif, Rgb** arr, int argc, cha
     else{
         puts("Вы вышли за границы изображения.");
         printf("Высота: %d.\n", h);
-        printf("Ширина: %d.", w);
+        printf("Ширина: %d.\n", w);
         exit(0);
     }
 	
